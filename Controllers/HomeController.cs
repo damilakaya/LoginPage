@@ -34,7 +34,6 @@ namespace STB.MAP.UI.Controllers
 
 				if (!ModelState.IsValid)
 				{
-					// ModelState'deki hataları ele al
 					var errorMessages = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
 					ViewData["ErrorMessage"] = string.Join(", ", errorMessages);
 				}
