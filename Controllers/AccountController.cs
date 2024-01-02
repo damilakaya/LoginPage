@@ -66,14 +66,11 @@ public class AccountController : Controller
 
 				if (signInResult.Succeeded)
 				{
-					// Başarılı giriş durumu
 					var claims = new List<Claim>
 				{
 					new Claim(ClaimTypes.NameIdentifier, user.Id),
 					new Claim(ClaimTypes.Name, user.UserName ?? string.Empty),
 					new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
-                    // İsteğe bağlı: Kullanıcının rol bilgilerini ekleyebilirsiniz
-                    // new Claim(ClaimTypes.Role, "User"),
                 };
 
 					var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -89,17 +86,14 @@ public class AccountController : Controller
 				}
 				else if (signInResult.IsLockedOut)
 				{
-					// Hesap kilitlendi durumu
 					ModelState.AddModelError(string.Empty, "Hesabınız kilitlendi. Lütfen bir süre sonra tekrar deneyin.");
 				}
 				else if (signInResult.RequiresTwoFactor)
 				{
-					// İki faktörlü kimlik doğrulama gerekiyor durumu
 					ModelState.AddModelError(string.Empty, "İki faktörlü kimlik doğrulama gerekiyor.");
 				}
 				else
 				{
-					// Geçersiz kullanıcı adı veya şifre durumu
 					ModelState.AddModelError(string.Empty, "Geçersiz kullanıcı adı veya şifre.");
 				}
 			}
@@ -108,8 +102,6 @@ public class AccountController : Controller
 				ModelState.AddModelError(string.Empty, "Kullanıcı bulunamadı. Lütfen doğru kullanıcı adı ve şifre girildiğinden emin olun.");
 			}
 		}
-
-		// Hatalı giriş durumu
 		return View(model);
 	}
 
